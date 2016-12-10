@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Project: 'https://github.com/AdrianDC/lineage_development_sony8996' -->
+<!-- Repo Init: 'repoinitlineage 14.1' -->
+<!-- ROM Patcher: 'lineagesony8996patcher' -->
+<!-- Untracked: 'android_development_manifests/untracked-lineage-14.1' -->
+<manifest>
+
+  <!-- LineageOS Dependency Projects -->
+  <project name="LineageOS/android_hardware_broadcom_fm" path="hardware/broadcom/fm" remote="github" />
+  <project name="LineageOS/android_vendor_nxp-nfc_opensource_frameworks" path="vendor/nxp-nfc/opensource/frameworks" remote="github" />
+  <project name="LineageOS/android_vendor_nxp-nfc_opensource_libnfc-nci" path="vendor/nxp-nfc/opensource/libnfc-nci" remote="github" />
+  <project name="LineageOS/android_vendor_nxp-nfc_opensource_Nfc" path="vendor/nxp-nfc/opensource/Nfc" remote="github" />
+
+  <!-- SONY Common Projects -->
+  <project name="LineageOS/android_device_qcom_common" path="device/qcom/common" remote="github" />
+  <project name="LineageOS/android_device_sony_common" path="device/sony/common" remote="github" />
+  <project name="LineageOS/android_hardware_sony_macaddrsetup" path="hardware/sony/macaddrsetup" remote="github" />
+  <project name="LineageOS/android_hardware_sony_timekeep" path="hardware/sony/timekeep" remote="github" />
+
+  <!-- SONY Dora Vendor Projects -->
+  <project name="AdrianDC/proprietary_vendor_sony" path="vendor/sony" remote="github" />
+
+  <!-- SONY Dora Devices Projects -->
+  <project name="AdrianDC/lineage_development_sonytone" path="device/sony/dora" remote="github" revision="device_sony_dora" />
+  <project name="AdrianDC/lineage_development_sonytone" path="kernel/sony/msm8996" remote="github" revision="kernel_sony_msm8996" />
+
+</manifest>

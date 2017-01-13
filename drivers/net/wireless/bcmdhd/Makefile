@@ -526,6 +526,7 @@ DHDOFILES := dhd_pno.o dhd_common.o dhd_ip.o dhd_custom_gpio.o \
 	wl_linux_mon.o wl_roam.o dhd_linux_platdev.o dhd_linux_wq.o wl_cfg_btcoex.o \
 	dhd_wlfc.o hnd_pktq.o hnd_pktpool.o dhd_debug.o dhd_debug_linux.o
 
+DHDOFILES += dhd_somc_custom.o
 
 ifeq ($(BUS_IFACE_SDIO),y)
 DHDOFILES += bcmsdh.o bcmsdh_linux.o bcmsdh_sdmmc.o bcmsdh_sdmmc_linux.o

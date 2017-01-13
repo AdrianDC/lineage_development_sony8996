@@ -248,7 +248,7 @@ ANDROID_OFILES := wl_cfgvendor.o dhd_rtt.o bcmxtlv.o bcm_app_utils.o
 # m: module type driver
 # y: built-in type driver
 ##########################
-DRIVER_TYPE ?= m
+DRIVER_TYPE ?= y
 
 #########################
 # Chip dependent feature

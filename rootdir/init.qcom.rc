@@ -51,7 +51,12 @@ on early-init
 on init
     mkdir /persist 0771 system system
     mkdir /persist/data 0700 system system
-    mkdir /idd 0751 system system
+    mkdir /idd 0751 idd idd
+    mkdir /rca 0750 idd idd
+
+    wait /dev/block/mmcblk0p1
+    chown tad tad /dev/block/mmcblk0p1
+    chmod 0770 /dev/block/mmcblk0p1
 
     write /sys/devices/soc/74a4900.sdhci/mmc_host/mmc1/clkgate_delay 1
     # Avoid long waits for rcu grace periods
@@ -83,6 +88,15 @@ on fs
 
     # Enable Bluetooth HFP 1.7
     setprop ro.bluetooth.hfp.ver 1.7
+
+    chown idd idd /idd
+    chmod 0751 /iddA
+    exec /system/bin/rm -r /idd/lost+found
+    symlink /idd /mnt/idd
+    chown idd idd /rca
+    chmod 0750 /rca
+    exec /system/bin/rm -r /rca/lost+found
+    symlink /rca /mnt/rca
 
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
@@ -285,11 +299,16 @@ on post-fs-data
     mkdir /data/fpc 0770 system system
 
     #Secd
-    mkdir /data/credmgr 0770 system drmrpc
-    mkdir /mnt/idd 0755 system drmrpc
-    mkdir /mnt/idd/output 0755 system drmrpc
-    mkdir /mnt/idd/socket 0711 system drmrpc
-    mkdir /mnt/idd/startup-prober 0700 root root
+    mkdir /data/credmgr 0770 system credmgr_client
+
+    mkdir /idd/lost+found 0770 root root
+    mkdir /idd/output 0755 idd idd
+    mkdir /idd/socket 0711 idd idd
+    mkdir /idd/startup-prober 0700 root root
+
+    restorecon_recursive /idd
+    mkdir /rca/plugins 0750 idd idd
+    restorecon_recursive /rca
 
     # KSM options
     write /sys/kernel/mm/ksm/pages_to_scan 100
@@ -552,7 +571,7 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
-    group camera system inet input graphics drmrpc
+    group camera system inet input graphics
     writepid /dev/cpuset/camera-daemon/tasks
 
 service fingerprintd /system/bin/fingerprintd
@@ -612,9 +631,9 @@ service adsprpcd /system/bin/adsprpcd
 # SONY misc
 service tad_static /sbin/tad_static /dev/block/bootdevice/by-name/TA 0,16
     class core
-    user root
-    group drmrpc
-    socket tad stream 0660 root drmrpc 
+    user tad
+    group tad root
+    socket tad stream 0660 system trimarea
     seclabel u:r:tad:s0
     writepid /dev/cpuset/system-background/tasks
 
@@ -622,7 +641,6 @@ service tad_static /sbin/tad_static /dev/block/bootdevice/by-name/TA 0,16
 service ta_qmi_service /system/bin/ta_qmi_service
     class main
     user root
-    group wakelock drmrpc
     writepid /dev/cpuset/system-background/tasks
 
 # SONY prop
@@ -707,8 +725,8 @@ service taimport /system/bin/taimport
 
 service updatemiscta /system/bin/updatemiscta
     class main
-    user root
-    group system drmrpc
+    user updatemiscta
+    group trimarea
     oneshot
 
 service audiod /system/bin/audiod
@@ -743,13 +761,57 @@ on property:init.svc.fuse_sdcard1=running
 
 service secd /system/bin/secd
     class main
-    user root
-    group system drmrpc
-    socket secd_ebl_sock stream 0660 root drmrpc
-    socket secd_devsec_sock stream 0660 root drmrpc
-    socket secd_credmgr_sock stream 0660 root drmrpc
+    user system
+    group system
+    socket secd_ebl_sock stream 0660 system credmgr_client
+    socket secd_devsec_sock stream 0660 system credmgr_client
+    socket secd_credmgr_sock stream 0660 system credmgr_client
 
 service iddd /system/bin/iddd
     class core
+    user idd
+    group idd log inet trimarea
+
+# Redefined Service
+service audioserver /system/bin/audioserver
+    class main
+    user audioserver
+    # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
+    group audio trimarea camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct qcom_diag
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+
+service cameraserver /system/bin/cameraserver
+    class main
+    user cameraserver
+    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct credmgr_client trimarea
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+
+service drm /system/bin/drmserver
+    class main
+    user drm
+    group drm system inet drmrpc readproc trimarea
+    writepid /dev/cpuset/foreground/tasks
+
+service media /system/bin/mediaserver
+    class main
+    user media
+    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm credmgr_client
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+
+service mediadrm /system/bin/mediadrmserver
+    class main
+    user media
+    group mediadrm drmrpc trimarea
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+
+service ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket sap_uim_socket1 stream 660 bluetooth bluetooth
+    socket rild-debug stream 660 radio system
     user root
-    group system drmrpc
+    group radio cache inet misc audio log readproc wakelock qcom_diag drmrpc trimarea

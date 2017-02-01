@@ -27,6 +27,9 @@
 /dev/block/platform/soc/7464900\.sdhci/by-name/TA              u:object_r:trim_area_partition_device:s0
 /dev/block/platform/msm_sdcc\.1/by-name/TA                     u:object_r:trim_area_partition_device:s0
 /dev/block/bootdevice/by-name/TA                               u:object_r:trim_area_partition_device:s0
+/dev/block/platform/soc/7464900\.sdhci/by-name/diag            u:object_r:diag_partition_device:s0
+/dev/block/bootdevice/by-name/diag                             u:object_r:diag_partition_device:s0
+/dev/block/mmcblk0p48                                          u:object_r:diag_partition_device:s0
 
 # MSM Performance
 #/sys/module/msm_performance(/.*)?                                   u:object_r:sysfs_performance:s0

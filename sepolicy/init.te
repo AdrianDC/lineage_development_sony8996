@@ -1,4 +1,5 @@
 #============= init ==============
 allow init debugfs:file write;
 allow init proc_dirty_ratio:file write;
+allow init trim_area_partition_device:blk_file setattr;
 allow init vfat:dir mounton;

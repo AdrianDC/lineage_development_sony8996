@@ -1,0 +1,18 @@
+# Init configuration for init_sony
+BOARD_SONY_INIT_FLAGS :=
+BOARD_SONY_INIT_INCLUDE := $(DEVICE_PATH)/include
+BOARD_SONY_INIT_SYMLINK := true
+
+# Board: tone. Device: dora
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_NUM="45"
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MAJOR="259"
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MINOR="13"
+
+# FOTA check is broken on all devices
+BOARD_SONY_INIT_FLAGS += -DFOTA_RAMDISK_CHECK="0"
+
+# Ensure keycheck is used on all devices on AOSP
+BOARD_SONY_INIT_FLAGS += -DKEYCHECK_ENABLED="1"
+
+# Only use Volume+ on all devices on AOSP
+BOARD_SONY_INIT_FLAGS += -DKEYCHECK_NO_DOWN="1"

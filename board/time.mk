@@ -1,0 +1,2 @@
+# Time
+TARGET_RECOVERY_QCOM_RTC_FIX := true

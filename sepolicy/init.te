@@ -1,0 +1,4 @@
+#============= init ==============
+allow init debugfs:file write;
+allow init proc_dirty_ratio:file write;
+allow init vfat:dir mounton;

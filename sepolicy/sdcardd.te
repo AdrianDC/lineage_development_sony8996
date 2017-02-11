@@ -1,0 +1,4 @@
+#============= sdcardd ==============
+allow sdcardd persist_file:dir search;
+allow sdcardd sdcard_posix:lnk_file { read getattr };
+allow sdcardd tombstone_data_file:dir search;

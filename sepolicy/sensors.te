@@ -1,0 +1,3 @@
+#============= sensors ==============
+allow sensors tad:unix_stream_socket connectto;
+allow sensors tad_socket:sock_file write;

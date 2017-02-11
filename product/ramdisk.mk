@@ -4,6 +4,7 @@ PRODUCT_PACKAGES += \
     init.dora.rc \
     init.qcom.rc \
     init.recovery.qcom.rc \
+    init.sony.usb.rc \
     ueventd.dora.rc
 
 # EMMC firmware

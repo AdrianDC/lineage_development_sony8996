@@ -7,7 +7,7 @@ The Sony Xperia X Performance (codenamed _"Dora"_) is a flagship smartphone from
 
 It was released in June 2016.
 
-Dora is being worked upon towards LineageOS 14.1
+Dora is now supported by LineageOS 14.1
 
 Basic   | Spec Sheet
 -------:|:----------------------

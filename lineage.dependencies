@@ -12,6 +12,10 @@
     "target_path": "hardware/broadcom/fm"
   },
   {
+    "repository": "android_hardware_sony_macaddrsetup",
+    "target_path": "hardware/sony/macaddrsetup"
+  },
+  {
     "repository": "android_kernel_sony_msm8996",
     "target_path": "kernel/sony/msm8996"
   }

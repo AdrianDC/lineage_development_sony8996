@@ -62,6 +62,22 @@ LOCAL_SRC_FILES    := lib/firmware/emmc/catalog.txt
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)/lib/firmware/emmc
 include $(BUILD_PREBUILT)
 
+# System init configurations
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := init.qcom.fm.sh
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := etc/init.qcom.fm.sh
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := init.qcom.sensors.sh
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := etc/init.qcom.sensors.sh
+include $(BUILD_PREBUILT)
+
 # Symlink fstab.qcom
 $(shell mkdir -p $(PRODUCT_OUT)/root && pushd $(PRODUCT_OUT)/root > /dev/null && \
     ln -fs fstab.$(TARGET_DEVICE) fstab.qcom && \

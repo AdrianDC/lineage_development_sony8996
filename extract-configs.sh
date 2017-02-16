@@ -119,3 +119,10 @@ fi
 
 # Sony/Device specific configs
 extract_configs "$MY_DIR"/proprietary-configs.txt "$MY_DIR" "$SRC"
+
+# Patch audio_policy_configuration.xml
+echo '  - Patching audio_policy_configuration.xml'
+sed -i '/                <item>AHC Rx<\/item>/d' "$MY_DIR/audio/audio_policy_configuration.xml"
+sed -i '/<devicePort tagName="External Stereo Mic"/,/<\/devicePort>/d' "$MY_DIR/audio/audio_policy_configuration.xml"
+sed -i '/<devicePort tagName="AHC Rx"/,/<\/devicePort>/d' "$MY_DIR/audio/audio_policy_configuration.xml"
+sed -i 's/,External Stereo Mic,AHC Rx"/"/' "$MY_DIR/audio/audio_policy_configuration.xml"

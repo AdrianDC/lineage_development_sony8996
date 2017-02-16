@@ -5,3 +5,8 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.recovery.qcom.rc \
     ueventd.dora.rc
+
+# EMMC firmware
+PRODUCT_PACKAGES += \
+    init_emmc_15-424A4E423452-0f_bin \
+    init_emmc_catalog_txt

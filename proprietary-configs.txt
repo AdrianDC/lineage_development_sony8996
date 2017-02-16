@@ -1,0 +1,54 @@
+# Audio
+etc/aanc_tuning_mixer.txt:audio/aanc_tuning_mixer.txt
+etc/audio_effects.conf:audio/audio_effects.conf
+vendor/etc/audio_output_policy.conf:audio/audio_output_policy.conf
+etc/audio_platform_info_i2s.xml:audio/audio_platform_info_i2s.xml
+etc/audio_platform_info.xml:audio/audio_platform_info.xml
+etc/audio_policy_configuration.xml:audio/audio_policy_configuration.xml
+etc/mixer_paths_tasha.xml:audio/mixer_paths_tasha.xml
+etc/mixer_paths.xml:audio/mixer_paths.xml
+etc/sound_trigger_mixer_paths_wcd9330.xml:audio/sound_trigger_mixer_paths_wcd9330.xml
+etc/sound_trigger_mixer_paths.xml:audio/sound_trigger_mixer_paths.xml
+etc/sound_trigger_platform_info.xml:audio/sound_trigger_platform_info.xml
+
+# Camera
+etc/camera/camera_config.xml:configs/camera/camera_config.xml
+
+# GPS
+etc/flp.conf:configs/gps/flp.conf
+etc/customization/settings/defaults/gps.conf:configs/gps/gps.conf
+etc/izat.conf:configs/gps/izat.conf
+etc/lowi.conf:configs/gps/lowi.conf
+etc/sap.conf:configs/gps/sap.conf
+etc/xtwifi.conf:configs/gps/xtwifi.conf
+
+# Keylayout
+usr/idc/clearpad.idc:keylayout/clearpad.idc
+usr/keylayout/clearpad.kl:keylayout/clearpad.kl
+usr/keylayout/gpio-keys.kl:keylayout/gpio-keys.kl
+usr/keylayout/qpnp_pon.kl:keylayout/qpnp_pon.kl
+usr/keylayout/synaptics_dsx.kl:keylayout/synaptics_dsx.kl
+
+# Media
+etc/media_codecs_performance.xml:media/media_codecs_performance.xml
+etc/media_codecs.xml:media/media_codecs.xml
+etc/media_profiles.xml:media/media_profiles.xml
+
+# NFC
+etc/libnfc-brcm.conf:configs/nfc/libnfc-brcm.conf
+etc/libnfc-nxp.conf:configs/nfc/libnfc-nxp.conf
+
+# Perf
+vendor/etc/msm_irqbalance.conf:configs/msm_irqbalance.conf
+etc/thermal-engine.conf:configs/thermal-engine.conf
+
+# Sensors
+etc/sensors/hals.conf:configs/sensors/hals.conf
+etc/sap.conf:configs/sensors/sap.conf
+etc/sec_config:configs/sensors/sec_config
+etc/sensors/sensor_def_qcomdev.conf:configs/sensors/sensor_def_qcomdev.conf
+
+# WiFi
+etc/wifi/fstman.ini:configs/wifi/fstman.ini
+etc/wifi/p2p_supplicant_overlay.conf:configs/wifi/p2p_supplicant_overlay.conf
+etc/wifi/wpa_supplicant_overlay.conf:configs/wifi/wpa_supplicant_overlay.conf

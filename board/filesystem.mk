@@ -11,5 +11,9 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
+# Filesystem configuration
+TARGET_ANDROID_FILESYSTEM_CONFIG_H := \
+    $(DEVICE_PATH)/include/private/android_filesystem_config.h
+
 # Partitions blocks
 BOARD_FLASH_BLOCK_SIZE := 262144

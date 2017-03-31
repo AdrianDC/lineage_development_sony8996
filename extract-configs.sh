@@ -126,3 +126,6 @@ sed -i '/                <item>AHC Rx<\/item>/d' "$MY_DIR/audio/audio_policy_con
 sed -i '/<devicePort tagName="External Stereo Mic"/,/<\/devicePort>/d' "$MY_DIR/audio/audio_policy_configuration.xml"
 sed -i '/<devicePort tagName="AHC Rx"/,/<\/devicePort>/d' "$MY_DIR/audio/audio_policy_configuration.xml"
 sed -i 's/,External Stereo Mic,AHC Rx"/"/' "$MY_DIR/audio/audio_policy_configuration.xml"
+
+# Patch libnfc-brcm.conf
+sed -i 's/NCI_HAL_MODULE="nfc_nci"/NCI_HAL_MODULE="nfc_nci.pn54x"/' "$MY_DIR/configs/nfc/libnfc-brcm.conf"

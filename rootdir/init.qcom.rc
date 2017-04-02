@@ -504,8 +504,23 @@ service sensors /system/bin/sensors.qcom
     disabled
 
 service sensor-sh /system/bin/sh /system/etc/init.qcom.sensors.sh
+    seclabel u:r:init:s0
     class core
     user root
+    oneshot
+
+service diag_mdlog_start /system/bin/diag_mdlog
+    class late_start
+    user shell
+    group system qcom_diag sdcard_rw sdcard_r media_rw
+    disabled
+    oneshot
+
+service diag_mdlog_stop /system/bin/diag_mdlog -k
+    class late_start
+    user shell
+    group system qcom_diag sdcard_rw sdcard_r media_rw
+    disabled
     oneshot
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth

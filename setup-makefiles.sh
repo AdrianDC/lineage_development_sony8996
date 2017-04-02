@@ -47,4 +47,7 @@ printf '\n' >> "$PRODUCTMK"
 # QCom common blobs
 write_makefiles "$MY_DIR"/proprietary-files-qc.txt
 
+# QCom graphics blobs
+write_makefiles "$MY_DIR"/proprietary-files-qc-graphics.txt
+
 write_footers

@@ -36,17 +36,36 @@ fi
 
 if [ $# -eq 0 ]; then
     SRC=adb
+    SRC_SECONDARY=adb
 else
     if [ $# -eq 1 ]; then
         SRC=$1
+        SRC_SECONDARY=$1
     else
-        echo "$0: bad number of arguments"
-        echo ""
-        echo "usage: $0 [PATH_TO_EXPANDED_ROM]"
-        echo ""
-        echo "If PATH_TO_EXPANDED_ROM is not specified, blobs will be extracted from"
-        echo "the device using adb pull."
-        exit 1
+        if [ $# -eq 2 ]; then
+            SRC=$1
+            SRC_SECONDARY=$2
+        else
+            echo "$0: bad number of arguments"
+            echo ""
+            echo "usage: $0 [PATH_TO_EXPANDED_ROM] [PATH_TO_UPDATED_VENDOR_OR_SYSTEM_PROPRIETARY]"
+            echo ""
+            echo "If PATH_TO_EXPANDED_ROM is not specified, blobs will be extracted from"
+            echo "the device using adb pull."
+            echo ""
+            echo "If PATH_TO_UPDATED_VENDOR_OR_SYSTEM_PROPRIETARY is also defined, some blobs"
+            echo "that require updated origins will be retrieved from another vendor path."
+            exit 1
+        fi
+    fi
+fi
+
+# Handle secondary path
+SRC_SECONDARY_LINKED=
+if [ ! "$SRC" = 'adb' ] && [ ! "$SRC" = "$SRC_SECONDARY" ]; then
+    if [ -d "$SRC_SECONDARY/proprietary" ] && [ ! -e "$SRC_SECONDARY/system" ]; then
+        ln -s "$SRC_SECONDARY/proprietary" "$SRC_SECONDARY/system"
+        SRC_SECONDARY_LINKED=true
     fi
 fi
 
@@ -59,5 +78,13 @@ extract "$MY_DIR"/proprietary-files-sony.txt "$SRC"
 # QCom common blobs
 extract "$MY_DIR"/proprietary-files-qc.txt "$SRC"
 
+# QCom graphics blobs
+extract "$MY_DIR"/proprietary-files-qc-graphics.txt "$SRC_SECONDARY"
+
 # Generate vendor makefiles
 "$MY_DIR"/setup-makefiles.sh
+
+# Cleanup secondary path
+if [ ! -z "$SRC_SECONDARY_LINKED" ]; then
+    rm "$SRC_SECONDARY/system"
+fi
